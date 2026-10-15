@@ -128,3 +128,27 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+/* ----- App Styles ----- */
+
+/* Wrapper for the parent component of both the map and sidebar */
+#app-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f0f0f0;
+}
+
+/* Container for the Leaflet map */
+#map-container {
+    height: 100%;
+    width: 70%;
+}
+
+#sidebar-container {
+    height: 100%;
+    width: 30%;
+}
