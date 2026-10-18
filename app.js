@@ -29,6 +29,11 @@ async function init() {
     const image = L.imageOverlay(config.image.filePath, bounds).addTo(map);
     map.fitBounds(bounds);
     map.on("click", onMapClick);
+
+    // Add markers from the stops array in the configuration data
+    config.stops.forEach((stop) => {
+        const marker = L.marker([stop.lat, stop.lng]).addTo(map);
+    });
 }
 
 // Function called when the user clicks on the map
