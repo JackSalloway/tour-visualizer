@@ -1,4 +1,5 @@
 let config; // variable to store the configuration data
+let map; // variable to globally store a reference to the map object
 
 // Function to load the configuration data from the config.json file
 async function loadConfig() {
@@ -19,7 +20,7 @@ async function init() {
     ];
 
     // Create a new leaflet map instance
-    const map = L.map("map-container", {
+    map = L.map("map-container", {
         crs: L.CRS.Simple, // treats the map as an image, not a globe
         minZoom: -2,
         maxZoom: 0,
@@ -27,6 +28,13 @@ async function init() {
 
     const image = L.imageOverlay(config.image.filePath, bounds).addTo(map);
     map.fitBounds(bounds);
+    map.on("click", onMapClick);
+}
+
+// Function called when the user clicks on the map
+function onMapClick(e) {
+    var marker = L.marker(e.latlng).addTo(map);
+    console.log("Marker added at " + e.latlng.lat + ", " + e.latlng.lng);
 }
 
 init();
