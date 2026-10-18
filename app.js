@@ -21,8 +21,8 @@ async function init() {
     // Create a new leaflet map instance
     const map = L.map("map-container", {
         crs: L.CRS.Simple, // treats the map as an image, not a globe
-        minZoom: 0,
-        maxZoom: 2,
+        minZoom: -2,
+        maxZoom: 0,
     });
 
     const image = L.imageOverlay(config.image.filePath, bounds).addTo(map);
