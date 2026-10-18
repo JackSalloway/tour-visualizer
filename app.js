@@ -26,8 +26,13 @@ async function init() {
         maxZoom: 0,
     });
 
-    const image = L.imageOverlay(config.image.filePath, bounds).addTo(map);
+    // Add the map image as an overlay on the leaflet map
+    L.imageOverlay(config.image.filePath, bounds).addTo(map);
+
+    // Fit the map view to the bounds of the image overlay
     map.fitBounds(bounds);
+
+    // Add event listeners
     map.on("click", onMapClick);
 
     // Add markers from the stops array in the configuration data
