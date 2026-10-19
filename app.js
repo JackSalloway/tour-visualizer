@@ -70,6 +70,27 @@ async function init() {
         return JSON.stringify(placedMarkerData, null, 2); // Return the formatted JSON string with indentation
     }
 
+    // Function to handle the state change when toggling the sidebar
+    function setSidebarStates() {
+        // Assign variables to container components
+        const tourInformationContainer = document.getElementById(
+            "tour-information-container",
+        );
+        const placedMarkersContainer = document.getElementById(
+            "placed-markers-container",
+        );
+
+        if (markerPlacementMode) {
+            placedMarkersContainer.hidden = false;
+            tourInformationContainer.hidden = true;
+            map.getContainer().style.cursor = "crosshair";
+        } else {
+            placedMarkersContainer.hidden = true;
+            tourInformationContainer.hidden = false;
+            map.getContainer().style.cursor = "";
+        }
+    }
+
     // Allow the user to add markers by left clicking on the map when marker placement mode is enabled
     map.on("click", (e) => {
         if (!markerPlacementMode) return; // Do nothing if marker placement mode is not enabled
@@ -83,11 +104,7 @@ async function init() {
     map.on("keydown", (e) => {
         if (e.originalEvent.key.toLowerCase() === "m") {
             markerPlacementMode = !markerPlacementMode;
-
-            // Change cursor style based on current mode
-            map.getContainer().style.cursor = markerPlacementMode
-                ? "crosshair"
-                : "";
+            setSidebarStates();
         }
     });
 }

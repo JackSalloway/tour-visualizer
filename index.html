@@ -16,12 +16,19 @@
         <div id="app-wrapper">
             <main id="map-container"></main>
             <aside id="sidebar-container">
-                <h2>Clicked points</h2>
-                <p>
-                    Press M to toggle marker placement mode, then click a point
-                    on the map to add a marker there.
-                </p>
-                <ol id="placed-markers-list"></ol>
+                <div id="tour-information-container">
+                    <h2>Tour view</h2>
+                    <p>Welcome to Tour Visualiser! this is default text</p>
+                </div>
+
+                <div id="placed-markers-container" hidden>
+                    <h2>Placed Markers</h2>
+                    <p>
+                        Press M to toggle marker placement mode, then click a
+                        point on the map to add a marker there.
+                    </p>
+                    <ol id="placed-markers-list"></ol>
+                </div>
             </aside>
         </div>
 
