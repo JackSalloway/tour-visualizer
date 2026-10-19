@@ -9,13 +9,17 @@
             "id": 1,
             "name": "Stop 1",
             "lat": 1122,
-            "lng": 2007
+            "lng": 2007,
+            "scripts": [],
+            "instructions": []
         },
         {
             "id": 2,
             "name": "Stop 2",
             "lat": 1076,
-            "lng": 1490
+            "lng": 1490,
+            "scripts": [],
+            "instructions": []
         }
     ]
 }

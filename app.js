@@ -53,14 +53,30 @@ async function init() {
         );
     }
 
+    // Function to produce a JSON array with the values of placed markers
+    function buildPlacedMarkerJSON() {
+        // Map over the array to produce an array of formatted values for each marker
+        const placedMarkerData = placedMarkers.map((marker, index) => {
+            const { lat, lng } = marker.getLatLng(); // Get marker location values
+            return {
+                id: index, // Assign a unique ID
+                name: `Stop ${index + 1}`, // Assign a basic name
+                lat: lat, // Assign the lat value
+                lng: lng, // Assign the lng value
+                scripts: [], // Placeholder array of strings for scripts associated with the marker, made an array to allow for paragraphs if wanted
+                instructions: [], // Placeholder array of strings for instructions associated with the marker, made an array to allow for paragraphs if wanted
+            };
+        });
+        return JSON.stringify(placedMarkerData, null, 2); // Return the formatted JSON string with indentation
+    }
+
     // Allow the user to add markers by left clicking on the map when marker placement mode is enabled
     map.on("click", (e) => {
         if (!markerPlacementMode) return; // Do nothing if marker placement mode is not enabled
         const marker = L.marker(e.latlng).addTo(map);
         placedMarkers.push(marker);
-        console.log("Marker added at " + e.latlng.lng + ", " + e.latlng.lat);
-        console.log(placedMarkers);
         renderPlacedMarkers(); // Update the sidebar content with the new list of markers
+        console.log(buildPlacedMarkerJSON()); // Log the JSON representation of the placed markers to the console
     });
 
     // Allow the user to toggle marker placement mode by pressing the M key
