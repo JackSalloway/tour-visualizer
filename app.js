@@ -8,6 +8,7 @@ async function loadConfig() {
 async function init() {
     let markerPlacementMode = false; // Variable to toggle between placement mode and normal mode
     let placedMarkers = []; // Variable to store references to the markers placed in placement mode
+
     // Load the configuration data and use object destructuring to assign required data to variables
     const { image, stops } = await loadConfig();
 
