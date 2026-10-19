@@ -1,5 +1,6 @@
 let config; // variable to store the configuration data
 let map; // variable to globally store a reference to the map object
+let markerPlacementMode = false; // Current state of the marker placement mode
 
 // Function to load the configuration data from the config.json file
 async function loadConfig() {
@@ -35,6 +36,18 @@ async function init() {
     // Add event listeners
     map.on("click", onMapClick);
 
+    // Allow the user to toggle marker placement mode by pressing the M key
+    map.on("keydown", (e) => {
+        if (e.originalEvent.key.toLowerCase() === "m") {
+            markerPlacementMode = !markerPlacementMode;
+
+            // Change cursor style based on current mode
+            map.getContainer().style.cursor = markerPlacementMode
+                ? "crosshair"
+                : "";
+        }
+    });
+
     // Add markers from the stops array in the configuration data
     config.stops.forEach((stop) => {
         const marker = L.marker([stop.lat, stop.lng]).addTo(map);
@@ -43,6 +56,7 @@ async function init() {
 
 // Function called when the user clicks on the map
 function onMapClick(e) {
+    if (!markerPlacementMode) return; // Do nothing if marker placement mode is not enabled
     var marker = L.marker(e.latlng).addTo(map);
     console.log("Marker added at " + e.latlng.lat + ", " + e.latlng.lng);
 }
