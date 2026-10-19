@@ -39,7 +39,7 @@ async function init() {
     map.on("click", (e) => {
         if (!markerPlacementMode) return; // Do nothing if marker placement mode is not enabled
         L.marker(e.latlng).addTo(map);
-        console.log("Marker added at " + e.latlng.lat + ", " + e.latlng.lng);
+        console.log("Marker added at " + e.latlng.lng + ", " + e.latlng.lat);
     });
 
     // Allow the user to toggle marker placement mode by pressing the M key
