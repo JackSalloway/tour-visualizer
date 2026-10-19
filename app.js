@@ -59,7 +59,7 @@ async function init() {
         const placedMarkerData = placedMarkers.map((marker, index) => {
             const { lat, lng } = marker.getLatLng(); // Get marker location values
             return {
-                id: index, // Assign a unique ID
+                id: index + 1, // Assign a unique ID
                 name: `Stop ${index + 1}`, // Assign a basic name
                 lat: lat, // Assign the lat value
                 lng: lng, // Assign the lng value
@@ -67,6 +67,7 @@ async function init() {
                 instructions: [], // Placeholder array of strings for instructions associated with the marker, made an array to allow for paragraphs if wanted
             };
         });
+
         return JSON.stringify(placedMarkerData, null, 2); // Return the formatted JSON string with indentation
     }
 
