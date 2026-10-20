@@ -83,7 +83,7 @@ async function init() {
                 lat: lat, // Assign the lat value
                 lng: lng, // Assign the lng value
                 iconPath: "", // Placeholder string that points to the location of the custom icon image
-                // Placeholder array of objects, containing a type and value property. These type value will be used to distinguish between scripts and information
+                // Placeholder array of objects, containing a type and value property. These type values will be used to distinguish between scripts and information
                 text: [
                     {
                         type: "",
