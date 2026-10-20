@@ -32,7 +32,7 @@ async function init() {
     map.fitBounds(bounds);
 
     // Add markers from the stops array in the configuration data, use a ternary operator to set the marker icon if there is one
-    stops.forEach((stop) => {
+    stops.forEach((stop, index) => {
         const marker = stop.iconPath
             ? L.marker([stop.lat, stop.lng], {
                   icon: L.icon({
@@ -51,9 +51,36 @@ async function init() {
             offset: stop.iconPath == "" ? [-14, -11] : [1, -41],
         });
 
-        // Add click event listener
-        marker.on("click", () => console.log(marker));
+        // Add click event listener to update the sidebar when a marker is clicked
+        marker.on("click", () => {
+            updateSidebarContent(index);
+            map.flyTo(marker._latlng, 0);
+        });
     });
+
+    // Function to update the value of the sidebar when a marker is clicked, or the next stop button is clicked
+    function updateSidebarContent(stopIndex) {
+        const currentStopData = stops[stopIndex];
+
+        // Assign the div element that will contain the information text to a variable
+        let sidebarTextContainer = document.getElementById("tour-information-text-container");
+
+        // Create a list of paragraph elements for the current stop
+        const paraNodes = currentStopData.text.map((text) => {
+            // Set the text value
+            const para = document.createElement("p");
+
+            para.textContent = text.value;
+
+            // Set the style values
+            text.type === "script" ? para.classList.add("blue") : para.classList.add("red");
+
+            return para
+        })
+
+        // Replace the child elements of the div with the new content
+        sidebarTextContainer.replaceChildren(...paraNodes);
+    }
 
     // Function to update the sidebar content. Called when a marker is added to the map
     function renderPlacedMarkers() {
