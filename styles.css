@@ -136,6 +136,13 @@ table {
     --black: #0a1414;
 }
 
+/* Make padding and borders count towards element width and height */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 /* ----- App Styles ----- */
 
 /* Wrapper for the parent component of both the map and sidebar */
