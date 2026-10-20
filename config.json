@@ -10,16 +10,37 @@
             "name": "Stop 1",
             "lat": 1122,
             "lng": 2007,
-            "scripts": [],
-            "instructions": []
+            "iconPath": "images/location_marker_test.svg",
+            "text": [
+                {
+                    "type": "information",
+                    "value": "During Open Days campus tours start from the Quad, it is different to Friday tours that you will wait by a lollipop with people for a while before the tour gets announced. When you hear the announcement, you need to leave the Quad and keep to tour timings to align with the schedule of the Open Day. While waiting for the tour to start, ask prospective students what courses they are interested in to start the conversation and to be able to highlight information more specific to them as you walk the tour. You can ask them if they’ve been to the intro talk and how much they know about UCA. If they haven’t or don’t know much you can say the following: "
+                },
+                {
+                    "type": "script",
+                    "value": "UCA is a specialised creative university. We have three campuses and this is our Farnham campus where we have all our craft courses based in, as well as, our Games, Creative Technology, Film, Design for Theatre, Music, Performance and Communication degrees like Illustration and Graphic Design. This is the Quad where all the talks and tours will start from today. Here you can find our Student Union, Accommodation office and Canteen (Refectory) where you can find toilets, refreshments and also ask questions to our Academic Staff, Accommodation, Finance and Wellbeing team."
+                },
+                {
+                    "type": "information",
+                    "value": "To reach the next stop head through the two sliding doors and take the first right into the Printmaking Room."
+                }
+            ]
         },
         {
             "id": 2,
             "name": "Stop 2",
             "lat": 1076,
             "lng": 1490,
-            "scripts": [],
-            "instructions": []
+            "text": [
+                {
+                    "type": "",
+                    "value": ""
+                },
+                {
+                    "type": "",
+                    "value": ""
+                }
+            ]
         }
     ]
 }
