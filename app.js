@@ -31,9 +31,19 @@ async function init() {
     // Fit the map view to the bounds of the image overlay
     map.fitBounds(bounds);
 
-    // Add markers from the stops array in the configuration data
+    // Add markers from the stops array in the configuration data, use a ternary operator to set the marker icon if there is one
     stops.forEach((stop) => {
-        const marker = L.marker([stop.lat, stop.lng]).addTo(map);
+        const marker = stop.iconPath
+            ? L.marker([stop.lat, stop.lng], {
+                  icon: L.icon({
+                      iconUrl: stop.iconPath,
+                      iconSize: [25, 41], // Defalut leaflet icon size for consistency throughout
+                      iconAnchor: [12.5, 41], // Offset the icon so the tip sits exactly on its lat lng values
+                  }),
+              })
+            : L.marker([stop.lat, stop.lng]); // If no icon, use a default leaflet icon instead
+
+        marker.addTo(map);
     });
 
     // Function to update the sidebar content. Called when a marker is added to the map
