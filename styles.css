@@ -175,6 +175,21 @@ table {
     font-family: Arial, sans-serif;
     font-size: 1rem;
 }
+
+/* Stack the tour info and placed markers containers so they fill the sidebar height */
+#tour-information-container,
+#placed-markers-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    gap: 1rem;
+}
+
+/* Prevent the display from overriding the hidden value so both containers are not always visible at the same time */
+#tour-information-container[hidden],
+#placed-markers-container[hidden] {
+    display: none;
 }
 
 /* Sidebar p element classes */
