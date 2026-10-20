@@ -159,6 +159,15 @@ table {
 #sidebar-container {
     height: 100%;
     width: 30%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--white);
+    color: var(--black);
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+}
 }
 
 /* Sidebar p element classes */
