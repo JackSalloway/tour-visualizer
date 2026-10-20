@@ -73,6 +73,14 @@ async function init() {
                 name: `Stop ${index + 1}`, // Assign a basic name
                 lat: lat, // Assign the lat value
                 lng: lng, // Assign the lng value
+                iconPath: "", // Placeholder string that points to the location of the custom icon image
+                // Placeholder array of objects, containing a type and value property. These type value will be used to distinguish between scripts and information
+                text: [
+                    {
+                        type: "",
+                        value: "",
+                    },
+                ],
                 scripts: [], // Placeholder array of strings for scripts associated with the marker, made an array to allow for paragraphs if wanted
                 instructions: [], // Placeholder array of strings for instructions associated with the marker, made an array to allow for paragraphs if wanted
             };
