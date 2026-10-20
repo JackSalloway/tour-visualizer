@@ -44,6 +44,15 @@ async function init() {
             : L.marker([stop.lat, stop.lng]); // If no icon, use a default leaflet icon instead
 
         marker.addTo(map);
+
+        // Attach a popup to the marker - effectively acts as mouseover and mouseout events in one
+        marker.bindTooltip(`<strong>${stop.name}</strong><br>Stop ${stop.id}`, {
+            direction: "top",
+            offset: stop.iconPath == "" ? [-14, -11] : [1, -41],
+        });
+
+        // Add click event listener
+        marker.on("click", () => console.log(marker));
     });
 
     // Function to update the sidebar content. Called when a marker is added to the map
