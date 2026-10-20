@@ -129,6 +129,13 @@ table {
     border-spacing: 0;
 }
 
+:root {
+    --fluro: #c8eb00;
+    --green: #f0ff00;
+    --white: #ffffff;
+    --black: #0a1414;
+}
+
 /* ----- App Styles ----- */
 
 /* Wrapper for the parent component of both the map and sidebar */
