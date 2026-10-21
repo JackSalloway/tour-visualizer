@@ -228,12 +228,3 @@ table {
 #tour-information-container .script {
     line-height: 1.2rem;
 }
-
-/* Sidebar p element classes */
-.red {
-    color: red;
-}
-
-.blue {
-    color: blue;
-}
