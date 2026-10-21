@@ -63,7 +63,9 @@ async function init() {
         const currentStopData = stops[stopIndex];
 
         // Assign the div element that will contain the information text to a variable
-        let sidebarTextContainer = document.getElementById("tour-information-text-container");
+        let sidebarTextContainer = document.getElementById(
+            "tour-information-text-container",
+        );
 
         // Create a list of paragraph elements for the current stop
         const paraNodes = currentStopData.text.map((text) => {
