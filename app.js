@@ -8,6 +8,7 @@ async function loadConfig() {
 async function init() {
     let markerPlacementMode = false; // Variable to toggle between placement mode and normal mode
     let placedMarkers = []; // Variable to store references to the markers placed in placement mode
+    let currentStop = -1; // Variable to store the current stop index. -1 = no stop selected
 
     // Load the configuration data and use object destructuring to assign required data to variables
     const { image, stops } = await loadConfig();
@@ -57,14 +58,13 @@ async function init() {
         });
 
         // Add click event listener to update the sidebar when a marker is clicked
-        marker.on("click", () => {
-            updateSidebarContent(index);
-            map.flyTo(marker._latlng, 0);
-        });
+        marker.on("click", () => updateSidebarContent(index));
     });
 
     // Function to update the value of the sidebar when a marker is clicked, or the next stop button is clicked
     function updateSidebarContent(stopIndex) {
+        currentStop = stopIndex; // Update the value of current stop
+
         const currentStopData = stops[stopIndex];
         const tourInformationContainer = document.getElementById(
             "tour-information-container",
@@ -111,6 +111,9 @@ async function init() {
             text.type === "script"
                 ? para.classList.add("script")
                 : para.classList.add("information");
+
+            // Pan the map to centre on the current stop
+            map.flyTo([currentStopData.lat, currentStopData.lng], 0);
 
             return para;
         });
@@ -201,6 +204,11 @@ async function init() {
             setSidebarStates();
         }
     });
+
+    const nextStopButton = document.getElementById("next-stop-button");
+    nextStopButton.addEventListener("click", (e) =>
+        updateSidebarContent(currentStop + 1),
+    );
 }
 
 init();
