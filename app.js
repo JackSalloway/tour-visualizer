@@ -86,8 +86,6 @@ async function init() {
                 tourInformationContainer.prepend(stopImage);
             }
 
-            console.log(currentStopData);
-
             // Update the image src value
             stopImage.src = currentStopData.image.path;
             stopImage.alt = currentStopData.image.altText;
