@@ -61,7 +61,9 @@ async function init() {
     // Function to update the value of the sidebar when a marker is clicked, or the next stop button is clicked
     function updateSidebarContent(stopIndex) {
         const currentStopData = stops[stopIndex];
-        const sidebar = document.getElementById("sidebar-container");
+        const tourInformationContainer = document.getElementById(
+            "tour-information-container",
+        );
         let stopImage = document.getElementById("stop-image");
 
         // Check if the stop has an image
@@ -70,7 +72,7 @@ async function init() {
             if (!stopImage) {
                 stopImage = document.createElement("img");
                 stopImage.id = "stop-image";
-                sidebar.prepend(stopImage);
+                tourInformationContainer.prepend(stopImage);
             }
 
             console.log(currentStopData);
