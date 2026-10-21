@@ -64,7 +64,13 @@ async function init() {
         const tourInformationContainer = document.getElementById(
             "tour-information-container",
         );
+        const tourInformationHeader = document.getElementById(
+            "tour-information-header",
+        );
         let stopImage = document.getElementById("stop-image");
+
+        // Update the text content of the header
+        tourInformationHeader.textContent = currentStopData.name;
 
         // Check if the stop has an image
         if (currentStopData.image.path) {
