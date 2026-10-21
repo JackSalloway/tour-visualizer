@@ -198,6 +198,15 @@ table {
     gap: 1rem;
 }
 
+/* Allow scrolling in the tour information container for stops that have a lot of information */
+#tour-information-text-container {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 0.5rem;
+}
+
 /* Prevent the display from overriding the hidden value so both containers are not always visible at the same time */
 #tour-information-container[hidden],
 #placed-markers-container[hidden] {
@@ -212,7 +221,7 @@ table {
 /* Tour information information text styles */
 #tour-information-container .information {
     color: var(--fluro);
-    padding: 0.75rem;
+    padding: 0 0.75rem;
 }
 
 /* Sidebar p element classes */
