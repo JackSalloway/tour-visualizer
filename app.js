@@ -80,6 +80,8 @@ async function init() {
             // Update the image src value
             stopImage.src = currentStopData.image.path;
             stopImage.alt = currentStopData.image.altText;
+        } else if (stopImage) {
+            stopImage.remove(); // Remove the image element if its in the DOM but the current stop doesn't have an image path value
         }
 
         // Assign the div element that will contain the information text to a variable

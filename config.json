@@ -36,6 +36,10 @@
             "lat": 1076,
             "lng": 1490,
             "iconPath": "",
+            "image": {
+                "path": "",
+                "altText": ""
+            },
             "text": [
                 {
                     "type": "",
