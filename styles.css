@@ -170,8 +170,8 @@ table {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background-color: var(--white);
-    color: var(--black);
+    background-color: var(--black);
+    color: var(--white);
     font-family: Arial, sans-serif;
     font-size: 1rem;
 }
@@ -202,6 +202,17 @@ table {
 #tour-information-container[hidden],
 #placed-markers-container[hidden] {
     display: none;
+}
+
+/* Tour information script text styles */
+#tour-information-container .script {
+    font-weight: 500;
+}
+
+/* Tour information information text styles */
+#tour-information-container .information {
+    color: var(--fluro);
+    padding: 0.75rem;
 }
 
 /* Sidebar p element classes */

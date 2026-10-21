@@ -75,10 +75,12 @@ async function init() {
             para.textContent = text.value;
 
             // Set the style values
-            text.type === "script" ? para.classList.add("blue") : para.classList.add("red");
+            text.type === "script"
+                ? para.classList.add("script")
+                : para.classList.add("information");
 
-            return para
-        })
+            return para;
+        });
 
         // Replace the child elements of the div with the new content
         sidebarTextContainer.replaceChildren(...paraNodes);
