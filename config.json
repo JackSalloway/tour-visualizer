@@ -7,22 +7,18 @@
     "stops": [
         {
             "id": 1,
-            "name": "Y01",
-            "lat": 1122,
-            "lng": 2007,
+            "name": "Printmaking Room - Y01",
+            "lat": 1105,
+            "lng": 2197.239564871967,
             "iconPath": "images/location_marker_test.svg",
             "image": {
-                "path": "images/test_room.jpg",
-                "altText": "An image of the area around the test room"
+                "path": "images/01_printmaking_room.jpg",
+                "altText": "An image of the inside of the Printmaking room"
             },
             "text": [
                 {
-                    "type": "information",
-                    "value": "During Open Days campus tours start from the Quad, it is different to Friday tours that you will wait by a lollipop with people for a while before the tour gets announced. When you hear the announcement, you need to leave the Quad and keep to tour timings to align with the schedule of the Open Day. While waiting for the tour to start, ask prospective students what courses they are interested in to start the conversation and to be able to highlight information more specific to them as you walk the tour. You can ask them if they’ve been to the intro talk and how much they know about UCA. If they haven’t or don’t know much you can say the following: "
-                },
-                {
                     "type": "script",
-                    "value": "UCA is a specialised creative university. We have three campuses and this is our Farnham campus where we have all our craft courses based in, as well as, our Games, Creative Technology, Film, Design for Theatre, Music, Performance and Communication degrees like Illustration and Graphic Design. This is the Quad where all the talks and tours will start from today. Here you can find our Student Union, Accommodation office and Canteen (Refectory) where you can find toilets, refreshments and also ask questions to our Academic Staff, Accommodation, Finance and Wellbeing team."
+                    "value": "This is our Printmaking Room. Here students can learn traditional printmaking methods like letter press, lino printing, screen printing, block printing and more. This room is popular with Illustration, Fine Art and Graphic Design students but any student from any course can get inducted into this space and use it during open studio time.  "
                 },
                 {
                     "type": "information",
@@ -32,22 +28,22 @@
         },
         {
             "id": 2,
-            "name": "Y32",
-            "lat": 1076,
-            "lng": 1490,
+            "name": "Print Bureau",
+            "lat": 982,
+            "lng": 1943.161950742529,
             "iconPath": "",
             "image": {
-                "path": "",
-                "altText": ""
+                "path": "images/02_print_bureau.jpg",
+                "altText": "An image of of the entrance to the print bureau"
             },
             "text": [
                 {
-                    "type": "",
-                    "value": ""
+                    "type": "script",
+                    "value": "This is our Print Bureau. Here students can get high-quality, competitively priced prints with a wide range of sizes and a selection of paper types to suit needs of every day projects needs as well as professional finished for exhibitions or project outcomes. Students often get art prints and stickers printed here as well to sell at our Art Markets that happen three times a year. Students can book tables for these markets and sell their own artworks or crafts. It’s a good way to get some extra income, get your name out there and start your business while your here.  "
                 },
                 {
-                    "type": "",
-                    "value": ""
+                    "type": "information",
+                    "value": "Continue through the double doors and down the stairs."
                 }
             ]
         }
