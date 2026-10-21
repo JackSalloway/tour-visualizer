@@ -229,7 +229,7 @@ table {
 }
 
 /* Next stop button styles */
-#next-stop-button {
+.stop-button {
     flex-shrink: 0;
     width: 100%;
     padding: 0.9rem 1rem;
@@ -249,13 +249,13 @@ table {
 }
 
 /* Change the buttons colours on mouse hover */
-#next-stop-button:hover {
+.stop-button:hover {
     background-color: var(--black);
     color: var(--fluro);
 }
 
 /* Add an outline to the button if it is focused with the keyboard */
-#next-stop-button:focus-visible {
+.stop-button:focus-visible {
     outline: 3px solid var(--white);
     outline-offset: 3px;
 }

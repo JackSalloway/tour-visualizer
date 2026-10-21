@@ -16,10 +16,34 @@
         <div id="app-wrapper">
             <main id="map-container"></main>
             <aside id="sidebar-container">
-                <div id="tour-information-container">
-                    <h1 id="tour-information-header">Tour Visualizer</h1>
+                <div id="welcome-container">
+                    <h1>Tour Visualiser</h1>
+                    <p>
+                        Welcome to this interactive campus tours training, where
+                        you can visualise the route and read through each stop’s
+                        information at your own pace. Please use this map to
+                        remind yourself before undertaking job opportunities or
+                        whenever you need to brush up on your knowledge!
+                    </p>
+
+                    <button id="start-tour-button" class="stop-button">
+                        Start tour!
+                    </button>
+                </div>
+
+                <div id="tour-information-container" hidden>
+                    <h1 id="tour-information-header">Room name</h1>
                     <div id="tour-information-text-container"></div>
-                    <button id="next-stop-button">Next stop</button>
+                    <button id="next-stop-button" class="stop-button">
+                        Next stop
+                    </button>
+                </div>
+
+                <div id="end-container" hidden>
+                    <h1>That's a wrap!</h1>
+                    <button id="end-tour-button" class="stop-button">
+                        Back to start
+                    </button>
                 </div>
 
                 <div id="placed-markers-container" hidden>

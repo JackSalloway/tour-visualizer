@@ -9,6 +9,15 @@ async function init() {
     let markerPlacementMode = false; // Variable to toggle between placement mode and normal mode
     let placedMarkers = []; // Variable to store references to the markers placed in placement mode
     let currentStop = -1; // Variable to store the current stop index. -1 = no stop selected
+    let currentPanel = "welcome"; // Variabnle to store the current panel key
+    let previousPanel = "welcome"; // Variable to store the previous panel key
+    // Variable to store references to each of the panels in the sidebar
+    const panels = {
+        welcome: document.getElementById("welcome-container"),
+        tour: document.getElementById("tour-information-container"),
+        end: document.getElementById("end-container"),
+        marker: document.getElementById("placed-markers-container"),
+    };
 
     // Load the configuration data and use object destructuring to assign required data to variables
     const { image, stops } = await loadConfig();
@@ -60,6 +69,13 @@ async function init() {
         // Add click event listener to update the sidebar when a marker is clicked
         marker.on("click", () => updateSidebarContent(index));
     });
+
+    // Function to hide all panels except the currently selected one
+    function showPanel(name) {
+        Object.values(panels).forEach((panel) => (panel.hidden = true));
+        panels[name].hidden = false;
+        currentPanel = name;
+    }
 
     // Function to update the value of the sidebar when a marker is clicked, or the next stop button is clicked
     function updateSidebarContent(stopIndex) {
@@ -165,27 +181,6 @@ async function init() {
         return JSON.stringify(placedMarkerData, null, 2); // Return the formatted JSON string with indentation
     }
 
-    // Function to handle the state change when toggling the sidebar
-    function setSidebarStates() {
-        // Assign variables to container components
-        const tourInformationContainer = document.getElementById(
-            "tour-information-container",
-        );
-        const placedMarkersContainer = document.getElementById(
-            "placed-markers-container",
-        );
-
-        if (markerPlacementMode) {
-            placedMarkersContainer.hidden = false;
-            tourInformationContainer.hidden = true;
-            map.getContainer().style.cursor = "crosshair";
-        } else {
-            placedMarkersContainer.hidden = true;
-            tourInformationContainer.hidden = false;
-            map.getContainer().style.cursor = "";
-        }
-    }
-
     // Allow the user to add markers by left clicking on the map when marker placement mode is enabled
     map.on("click", (e) => {
         if (!markerPlacementMode) return; // Do nothing if marker placement mode is not enabled
@@ -198,15 +193,38 @@ async function init() {
     // Allow the user to toggle marker placement mode by pressing the M key
     map.on("keydown", (e) => {
         if (e.originalEvent.key.toLowerCase() === "m") {
-            markerPlacementMode = !markerPlacementMode;
-            setSidebarStates();
+            markerPlacementMode = !markerPlacementMode; // toggle the value of markerPlacementMode
+
+            // Check if markerPlacement mode is enabled. Shows the marker panel if true, previous panel if false
+            if (markerPlacementMode) {
+                previousPanel = currentPanel;
+                showPanel("marker");
+                map.getContainer().style.cursor = "crosshair";
+            } else {
+                showPanel(previousPanel);
+                map.getContainer().style.cursor = "";
+            }
         }
     });
 
+    const startTourButton = document.getElementById("start-tour-button");
+    startTourButton.addEventListener("click", (e) => {
+        updateSidebarContent(0);
+        showPanel("tour");
+    });
+
     const nextStopButton = document.getElementById("next-stop-button");
-    nextStopButton.addEventListener("click", (e) =>
-        updateSidebarContent(currentStop + 1),
-    );
+    nextStopButton.addEventListener("click", (e) => {
+        if (currentStop === stops.length - 1) {
+            map.flyTo([image.height / 2, image.width / 2], -2);
+            showPanel("end");
+        } else updateSidebarContent(currentStop + 1);
+    });
+
+    const endTourButton = document.getElementById("end-tour-button");
+    endTourButton.addEventListener("click", (e) => {
+        showPanel("welcome");
+    });
 }
 
 init();
