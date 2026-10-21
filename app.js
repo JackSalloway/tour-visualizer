@@ -121,8 +121,6 @@ async function init() {
                         value: "",
                     },
                 ],
-                scripts: [], // Placeholder array of strings for scripts associated with the marker, made an array to allow for paragraphs if wanted
-                instructions: [], // Placeholder array of strings for instructions associated with the marker, made an array to allow for paragraphs if wanted
             };
         });
 
