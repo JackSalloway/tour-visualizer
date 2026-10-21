@@ -28,6 +28,11 @@ async function init() {
     // Add the map image as an overlay on the leaflet map
     L.imageOverlay(image.filePath, bounds).addTo(map);
 
+    // Add the tour route image as an overlay ontop of the map image
+    L.imageOverlay(image.routeFilePath, bounds, { interactive: false }).addTo(
+        map,
+    );
+
     // Fit the map view to the bounds of the image overlay
     map.fitBounds(bounds);
 

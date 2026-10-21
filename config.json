@@ -1,6 +1,7 @@
 {
     "image": {
         "filePath": "images/map.png",
+        "routeFilePath": "images/route_01.png",
         "width": 3508,
         "height": 2480
     },
