@@ -188,6 +188,10 @@ table {
     margin-bottom: 1rem;
 }
 
+#sidebar-container p {
+    line-height: 1.2rem;
+}
+
 /* Stack the tour info and placed markers containers so they fill the sidebar height */
 #tour-information-container,
 #placed-markers-container {
@@ -222,11 +226,6 @@ table {
 #tour-information-container .information {
     color: var(--fluro);
     padding: 0 0.75rem;
-}
-
-#tour-information-container .information,
-#tour-information-container .script {
-    line-height: 1.2rem;
 }
 
 /* Next stop button styles */
