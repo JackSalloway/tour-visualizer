@@ -224,6 +224,11 @@ table {
     padding: 0 0.75rem;
 }
 
+#tour-information-container .information,
+#tour-information-container .script {
+    line-height: 1.2rem;
+}
+
 /* Sidebar p element classes */
 .red {
     color: red;
