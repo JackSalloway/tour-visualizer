@@ -176,6 +176,18 @@ table {
     font-size: 1rem;
 }
 
+/* Sidebar header styles */
+#sidebar-container h1 {
+    font-family: "garage-gothic", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 2rem;
+    line-height: 0.8;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
 /* Stack the tour info and placed markers containers so they fill the sidebar height */
 #tour-information-container,
 #placed-markers-container {
