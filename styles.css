@@ -228,3 +228,35 @@ table {
 #tour-information-container .script {
     line-height: 1.2rem;
 }
+
+/* Next stop button styles */
+#next-stop-button {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 2px solid var(--fluro);
+    border-radius: 0;
+    background-color: var(--fluro);
+    color: var(--black);
+    font-family: "garage-gothic", sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2 ease;
+}
+
+/* Change the buttons colours on mouse hover */
+#next-stop-button:hover {
+    background-color: var(--black);
+    color: var(--fluro);
+}
+
+/* Add an outline to the button if it is focused with the keyboard */
+#next-stop-button:focus-visible {
+    outline: 3px solid var(--white);
+    outline-offset: 3px;
+}
