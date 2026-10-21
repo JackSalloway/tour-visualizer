@@ -11,6 +11,10 @@
             "lat": 1122,
             "lng": 2007,
             "iconPath": "images/location_marker_test.svg",
+            "image": {
+                "path": "images/test_room.jpg",
+                "altText": "An image of the area around the test room"
+            },
             "text": [
                 {
                     "type": "information",

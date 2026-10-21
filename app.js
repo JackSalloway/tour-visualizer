@@ -61,6 +61,24 @@ async function init() {
     // Function to update the value of the sidebar when a marker is clicked, or the next stop button is clicked
     function updateSidebarContent(stopIndex) {
         const currentStopData = stops[stopIndex];
+        const sidebar = document.getElementById("sidebar-container");
+        let stopImage = document.getElementById("stop-image");
+
+        // Check if the stop has an image
+        if (currentStopData.image.path) {
+            // Check if the image element already exists, create it if not
+            if (!stopImage) {
+                stopImage = document.createElement("img");
+                stopImage.id = "stop-image";
+                sidebar.prepend(stopImage);
+            }
+
+            console.log(currentStopData);
+
+            // Update the image src value
+            stopImage.src = currentStopData.image.path;
+            stopImage.alt = currentStopData.image.altText;
+        }
 
         // Assign the div element that will contain the information text to a variable
         let sidebarTextContainer = document.getElementById(
@@ -114,6 +132,10 @@ async function init() {
                 lat: lat, // Assign the lat value
                 lng: lng, // Assign the lng value
                 iconPath: "", // Placeholder string that points to the location of the custom icon image
+                image: {
+                    path: "", // Placeholder string that points to the location of the image
+                    altText: "", // Placeholder string to describe the images alternative text
+                },
                 // Placeholder array of objects, containing a type and value property. These type values will be used to distinguish between scripts and information
                 text: [
                     {
