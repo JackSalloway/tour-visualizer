@@ -245,7 +245,7 @@ table {
     cursor: pointer;
     transition:
         background-color 0.2s ease,
-        color 0.2 ease;
+        color 0.2s ease;
 }
 
 /* Change the buttons colours on mouse hover */
