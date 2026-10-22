@@ -223,6 +223,8 @@ async function init() {
     const copyJSONButton = document.getElementById("copy-json-button");
     copyJSONButton.addEventListener("click", async () => {
         await navigator.clipboard.writeText(buildPlacedMarkerJSON());
+        copyJSONButton.textContent = "Copied!";
+        setTimeout(() => (copyJSONButton.textContent = "Copy JSON"), 1500);
     });
 }
 
