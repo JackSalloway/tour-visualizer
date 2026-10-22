@@ -176,8 +176,8 @@ async function init() {
                 lat: lat, // Assign the lat value
                 lng: lng, // Assign the lng value
                 icon: {
-                    unselectedPath: "",
-                    selectedPath: "",
+                    unselectedPath: "", // Placeholder string that points to the location of the unselected icon variant
+                    selectedPath: "", // Placeholder string that points to the location of the selected icon variant
                 },
                 image: {
                     path: "", // Placeholder string that points to the location of the image
