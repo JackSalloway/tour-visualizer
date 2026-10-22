@@ -219,7 +219,10 @@ async function init() {
     const nextStopButton = document.getElementById("next-stop-button");
     nextStopButton.addEventListener("click", (e) => {
         if (currentStop === stops.length - 1) {
-            map.flyTo([image.height / 2, image.width / 2], -2);
+            map.flyTo([image.height / 2, image.width / 2], -2, {
+                animate: true,
+                duration: 1,
+            });
             showPanel("end");
         } else updateSidebarContent(currentStop + 1);
     });
