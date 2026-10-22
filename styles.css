@@ -176,6 +176,13 @@ table {
     font-size: 1rem;
 }
 
+#sidebar-container > div:not([hidden]) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
 /* Sidebar header styles */
 #sidebar-container h1 {
     font-family: "garage-gothic", sans-serif;
@@ -233,6 +240,8 @@ table {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-height: 0;
     gap: 1rem;
     padding-right: 0.5rem;
 }
@@ -259,6 +268,7 @@ table {
     flex-shrink: 0;
     width: 100%;
     padding: 0.9rem 1rem;
+    margin-top: auto;
     border: 2px solid var(--fluro);
     border-radius: 20px;
     background-color: var(--fluro);
