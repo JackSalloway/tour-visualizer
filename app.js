@@ -139,21 +139,10 @@ async function init() {
         sidebarTextContainer.replaceChildren(...paraNodes);
     }
 
-    // Function to update the sidebar content. Called when a marker is added to the map
+    // Function to update the sidebar content when marker placement mode is enabled. Called when a marker is added to the map
     function renderPlacedMarkers() {
-        const placedMarkersList = document.getElementById(
-            "placed-markers-list",
-        );
-
-        // Replace the child elements of the placed markers list with the new list of markers
-        placedMarkersList.replaceChildren(
-            ...placedMarkers.map((marker) => {
-                const { lat, lng } = marker.getLatLng(); // Get marker location values
-                const item = document.createElement("li"); // Create a new list item element
-                item.textContent = `Marker at ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                return item; // Return the new list item element back to the map function
-            }),
-        );
+        document.getElementById("placed-markers-json").value =
+            buildPlacedMarkerJSON();
     }
 
     // Function to produce a JSON array with the values of placed markers

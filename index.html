@@ -49,10 +49,20 @@
                 <div id="placed-markers-container" hidden>
                     <h1>Placed Markers</h1>
                     <p>
-                        Press M to toggle marker placement mode, then click a
-                        point on the map to add a marker there.
+                        Welcome to marker placement mode. Use this panel to
+                        create new tours by clicking the map to place a marker
+                        there. Each marker placed will create a template for
+                        you. the id, lat, and lng values are meaningful and
+                        shouldnt be changed.
                     </p>
-                    <ol id="placed-markers-list"></ol>
+                    <p>
+                        Once done, click the copy JSON button, or copy directly
+                        from the text field to copy your custom stops array!
+                    </p>
+                    <textarea id="placed-markers-json" readonly></textarea>
+                    <button id="copy-json-button" class="stop-button">
+                        Copy JSON
+                    </button>
                 </div>
             </aside>
         </div>

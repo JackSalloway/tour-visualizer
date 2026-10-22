@@ -259,3 +259,20 @@ table {
     outline: 3px solid var(--white);
     outline-offset: 3px;
 }
+
+/* Placed markers text field styles */
+#placed-markers-json {
+    flex: 1 1 0;
+    height: auto;
+    min-height: 0;
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--fluro);
+    border-radius: 0;
+    background-color: var(--black);
+    color: var(--white);
+    font-family: "Courier New", monospace;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    resize: none;
+}
