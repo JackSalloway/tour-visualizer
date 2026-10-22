@@ -4,6 +4,23 @@ async function loadConfig() {
     return response.json();
 }
 
+// Function to set the icon for a stop.
+function getStopIcon(stop, selected) {
+    // Check if the marker is selected, and set its icon accordingly
+    const iconPath = selected
+        ? stop.icon.selectedPath
+        : stop.icon.unselectedPath;
+
+    // Set the icon to the default leaflet version if there is no path in the config
+    if (!iconPath) return new L.Icon.Default();
+
+    return L.icon({
+        iconUrl: iconPath,
+        iconSize: [25, 41],
+        iconAnchor: [12.5, 41],
+    });
+}
+
 // Function to initialize the application after the configuration data has been loaded
 async function init() {
     let markerPlacementMode = false; // Variable to toggle between placement mode and normal mode
@@ -18,6 +35,7 @@ async function init() {
         end: document.getElementById("end-container"),
         marker: document.getElementById("placed-markers-container"),
     };
+    const stopMarkers = []; // Variable to store references to each stop marker.
 
     // Load the configuration data and use object destructuring to assign required data to variables
     const { image, stops } = await loadConfig();
@@ -48,22 +66,16 @@ async function init() {
 
     // Add markers from the stops array in the configuration data, use a ternary operator to set the marker icon if there is one
     stops.forEach((stop, index) => {
-        const marker = stop.iconPath
-            ? L.marker([stop.lat, stop.lng], {
-                  icon: L.icon({
-                      iconUrl: stop.iconPath,
-                      iconSize: [25, 41], // Defalut leaflet icon size for consistency throughout
-                      iconAnchor: [12.5, 41], // Offset the icon so the tip sits exactly on its lat lng values
-                  }),
-              })
-            : L.marker([stop.lat, stop.lng]); // If no icon, use a default leaflet icon instead
+        const marker = L.marker([stop.lat, stop.lng], {
+            icon: getStopIcon(stop, false),
+        }).addTo(map);
 
-        marker.addTo(map);
+        stopMarkers.push(marker);
 
         // Attach a popup to the marker - effectively acts as mouseover and mouseout events in one
         marker.bindTooltip(`<strong>${stop.name}</strong><br>Stop ${stop.id}`, {
             direction: "top",
-            offset: stop.iconPath == "" ? [-14, -11] : [1, -41],
+            offset: stop.icon.unselectedPath ? [1, -41] : [-14, -11],
         });
 
         // Add click event listener to update the sidebar when a marker is clicked
@@ -83,6 +95,11 @@ async function init() {
     // Function to update the value of the sidebar when a marker is clicked, or the next stop button is clicked
     function updateSidebarContent(stopIndex) {
         currentStop = stopIndex; // Update the value of current stop
+
+        // Set each markers icon, setting the current stops icon as its selected version
+        stopMarkers.forEach((marker, i) =>
+            marker.setIcon(getStopIcon(stops[i], i === currentStop)),
+        );
 
         const currentStopData = stops[stopIndex];
         const tourInformationContainer = document.getElementById(
@@ -209,11 +226,20 @@ async function init() {
 
     const nextStopButton = document.getElementById("next-stop-button");
     nextStopButton.addEventListener("click", (e) => {
+        // Check if the tour is over
         if (currentStop === stops.length - 1) {
             map.flyTo([image.height / 2, image.width / 2], -2, {
                 animate: true,
                 duration: 1,
             });
+
+            currentStop = -1;
+
+            // Set each markers icon to the unselected version
+            stopMarkers.forEach((marker, i) =>
+                marker.setIcon(getStopIcon(stops[i], false)),
+            );
+
             showPanel("end");
         } else updateSidebarContent(currentStop + 1);
     });
