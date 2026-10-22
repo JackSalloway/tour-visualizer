@@ -219,6 +219,11 @@ async function init() {
     endTourButton.addEventListener("click", (e) => {
         showPanel("welcome");
     });
+
+    const copyJSONButton = document.getElementById("copy-json-button");
+    copyJSONButton.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(buildPlacedMarkerJSON());
+    });
 }
 
 init();
