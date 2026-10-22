@@ -126,10 +126,13 @@ async function init() {
                 ? para.classList.add("script")
                 : para.classList.add("information");
 
-            // Pan the map to centre on the current stop
-            map.flyTo([currentStopData.lat, currentStopData.lng], 0);
-
             return para;
+        });
+
+        // Pan the map to centre on the current stop
+        map.panTo([currentStopData.lat, currentStopData.lng], {
+            animate: false,
+            duration: 1,
         });
 
         // Replace the child elements of the div with the new content
