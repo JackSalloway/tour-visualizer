@@ -179,7 +179,6 @@ async function init() {
         const marker = L.marker(e.latlng).addTo(map);
         placedMarkers.push(marker);
         renderPlacedMarkers(); // Update the sidebar content with the new list of markers
-        console.log(buildPlacedMarkerJSON()); // Log the JSON representation of the placed markers to the console
     });
 
     // Allow the user to toggle marker placement mode by pressing the M key
