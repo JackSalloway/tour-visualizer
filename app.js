@@ -67,7 +67,10 @@ async function init() {
         });
 
         // Add click event listener to update the sidebar when a marker is clicked
-        marker.on("click", () => updateSidebarContent(index));
+        marker.on("click", () => {
+            updateSidebarContent(index);
+            showPanel("tour");
+        });
     });
 
     // Function to hide all panels except the currently selected one
