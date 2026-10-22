@@ -175,7 +175,10 @@ async function init() {
                 name: `Stop ${index + 1}`, // Assign a basic name
                 lat: lat, // Assign the lat value
                 lng: lng, // Assign the lng value
-                iconPath: "", // Placeholder string that points to the location of the custom icon image
+                icon: {
+                    unselectedPath: "",
+                    selectedPath: "",
+                },
                 image: {
                     path: "", // Placeholder string that points to the location of the image
                     altText: "", // Placeholder string to describe the images alternative text
