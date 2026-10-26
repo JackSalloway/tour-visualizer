@@ -73,7 +73,7 @@ async function init() {
         stopMarkers.push(marker);
 
         // Attach a popup to the marker - effectively acts as mouseover and mouseout events in one
-        marker.bindTooltip(`<strong>${stop.name}</strong><br>Stop ${stop.id}`, {
+        marker.bindTooltip(`<strong>${stop.name}</strong>`, {
             direction: "top",
             offset: stop.icon.unselectedPath ? [1, -41] : [-14, -11],
         });
