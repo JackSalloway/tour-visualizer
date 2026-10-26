@@ -270,7 +270,7 @@ table {
     padding: 0.9rem 1rem;
     margin-top: auto;
     border: 2px solid var(--fluro);
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: var(--fluro);
     color: var(--black);
     font-family: "garage-gothic", sans-serif;
