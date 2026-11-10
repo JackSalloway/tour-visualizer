@@ -263,12 +263,6 @@ table {
     padding: 0 0.75rem;
 }
 
-#tour-information-container #tour-information-time {
-    font-weight: 500;
-    color: var(--fluro);
-    padding: 0 0.75rem;
-}
-
 /* Next stop button styles */
 .stop-button {
     flex-shrink: 0;
