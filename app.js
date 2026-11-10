@@ -108,10 +108,18 @@ async function init() {
         const tourInformationHeader = document.getElementById(
             "tour-information-header",
         );
+        const tourInformationTime = document.getElementById(
+            "tour-information-time",
+        );
         let stopImage = document.getElementById("stop-image");
 
         // Update the text content of the header
         tourInformationHeader.textContent = currentStopData.name;
+
+        // Use a ternary operator to check if the current stop has an approximate time value, and update the text content of the time element accordingly
+        tourInformationTime.textContent = currentStopData.approximateTime
+            ? `Approximate time: ${currentStopData.approximateTime}`
+            : "No time provided";
 
         // Check if the stop has an image
         if (currentStopData.image.path) {
@@ -173,6 +181,7 @@ async function init() {
             return {
                 id: index + 1, // Assign a unique ID
                 name: `Stop ${index + 1}`, // Assign a basic name
+                approximateTime: "", // Placeholder for the approximate time value
                 lat: lat, // Assign the lat value
                 lng: lng, // Assign the lng value
                 icon: {
