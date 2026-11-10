@@ -35,7 +35,9 @@ async function init() {
         end: document.getElementById("end-container"),
         marker: document.getElementById("placed-markers-container"),
     };
-    const stopMarkers = []; // Variable to store references to each stop marker.
+
+    // Variable to store references to each stop marker.
+    const stopMarkers = [];
 
     // Load the configuration data and use object destructuring to assign required data to variables
     const { image, stops } = await loadConfig();
