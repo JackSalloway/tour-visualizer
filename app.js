@@ -35,6 +35,8 @@ async function init() {
         end: document.getElementById("end-container"),
         marker: document.getElementById("placed-markers-container"),
     };
+    const minSidebarWidth = 500; // Minimum width of the sidebar in pixels
+    const maxSidebarWidth = window.innerWidth * 0.5; // Maximum width of the sidebar in pixels
 
     // Variable to store references to each stop marker.
     const stopMarkers = [];
@@ -230,6 +232,45 @@ async function init() {
                 map.getContainer().style.cursor = "";
             }
         }
+    });
+
+    // Add event listeners to the sidebar handle to allow the user to resize it
+    const sidebarHandle = document.getElementById("resize-handle");
+    // Pointer down event to initiate the resizing of the sidebar when the handle is clicked
+    sidebarHandle.addEventListener("pointerdown", (e) => {
+        sidebarHandle.setPointerCapture(e.pointerId); // Capture the pointer id in the sidebar handle
+        sidebarHandle.classList.add("dragging"); // Update styles
+        document.body.style.userSelect = "none"; // Prevent the user from selecting text
+    });
+
+    // Pointer move event to resize the sidebar when the handle is dragged
+    sidebarHandle.addEventListener("pointermove", (e) => {
+        if (!sidebarHandle.hasPointerCapture(e.pointerId)) return; // Ignore mouse movement if the pointer is not captured
+
+        const newWidth = window.innerWidth - e.clientX; // Calculate the new width of the sidebar based on the mouse position
+
+        // Clamp the new width between the sidebar minimum and maximum width values
+        const clamped = Math.min(
+            Math.max(newWidth, minSidebarWidth),
+            maxSidebarWidth,
+        );
+
+        // Update the CSS variable to set the sidebar width
+        document.documentElement.style.setProperty(
+            "--sidebar-width",
+            `${clamped}px`,
+        );
+
+        // Invalidate the map size to update the layout
+        map.invalidateSize();
+    });
+
+    // Pointer up event to stop resizing the sidebar when the handle is released
+    sidebarHandle.addEventListener("pointerup", (e) => {
+        sidebarHandle.releasePointerCapture(e.pointerId); // Release the pointer capture
+        sidebarHandle.classList.remove("dragging"); // Update styles
+        document.body.style.userSelect = ""; // Allow the user to select text
+        map.fitBounds(bounds, { animate: true }); // Fit the map to the bounds of the image overlay (sets the map back to the centre of its container)
     });
 
     const startTourButton = document.getElementById("start-tour-button");
