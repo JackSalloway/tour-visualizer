@@ -166,10 +166,13 @@ async function init() {
         // Update the text content of the header
         tourInformationHeader.textContent = currentStopData.name;
 
-        // Use a ternary operator to check if the current stop has an approximate time value, and update the text content of the time element accordingly
-        tourInformationTime.textContent = currentStopData.approximateTime
-            ? `Approximate time: ${currentStopData.approximateTime}`
-            : "No time provided";
+        // Update the value of the time information paragraph
+        tourInformationTime.textContent = currentStopData.approximateTime;
+
+        // Use a ternary operator to hide the time information paragraph if the current stop does not have an approximate time value
+        tourInformationTime.textContent === ""
+            ? (tourInformationTime.style.display = "none")
+            : (tourInformationTime.style.display = "block");
 
         // Check if the stop has an image
         if (currentStopData.image.path) {
