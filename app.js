@@ -1,3 +1,27 @@
+// Custom class that extends the Leaflet Control class to allow for easy addition of elements to the corners of the map
+class CornerControl extends L.Control {
+    // Override the onAdd method and return an element to be added to the map
+    onAdd() {
+        let element; // Variable to store the element that will be added to the map
+
+        if (this.options.imageSrc) {
+            // Create an img element if the imageSrc option exists
+            element = L.DomUtil.create(
+                "img",
+                "corner-control map-corner-image",
+            );
+            element.src = this.options.imageSrc;
+            element.alt = this.options.imageAlt ?? "";
+        } else {
+            // Otherwise, create a div element with text context
+            element = L.DomUtil.create("div", "corner-control map-corner-text");
+            element.textContent = this.options.text ?? "";
+        }
+
+        return element;
+    }
+}
+
 // Function to load the configuration data from the config.json file
 async function loadConfig() {
     const response = await fetch("config.json");
@@ -55,6 +79,7 @@ async function init() {
         crs: L.CRS.Simple, // treats the map as an image, not a globe
         minZoom: -2,
         maxZoom: 0,
+        zoomControl: false, // Disable the default zoom control
     });
 
     // Add the map image as an overlay on the leaflet map
@@ -67,6 +92,27 @@ async function init() {
 
     // Fit the map view to the bounds of the image overlay
     map.fitBounds(bounds);
+
+    // Add content to the corners of the map using the CornerControl class
+    // Top left corner
+    new CornerControl({
+        position: "topleft",
+        text: "Ambassador Tour Campus Training",
+    }).addTo(map);
+    L.control.zoom({ position: "topleft" }).addTo(map); // Add the zoom control underneath the text
+
+    // Bottom left corner
+    new CornerControl({
+        position: "bottomleft",
+        text: "Developed by Elly Winters (BA Digital Art) & Jack Salloway (BSc Computer Science)",
+    }).addTo(map);
+
+    // Top right corner
+    new CornerControl({
+        position: "topright",
+        imageSrc: "images/uni_logo.png",
+        imageAlt: "University for the Creative Arts Logo",
+    }).addTo(map);
 
     // Add markers from the stops array in the configuration data, use a ternary operator to set the marker icon if there is one
     stops.forEach((stop, index) => {

@@ -166,6 +166,20 @@ table {
     min-width: 0px;
 }
 
+/* Map corners */
+
+.map-corner-text {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.map-corner-image {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
 /* Container for the informational sidebar */
 #sidebar-container {
     container-type: inline-size; /* Enables container queries */
