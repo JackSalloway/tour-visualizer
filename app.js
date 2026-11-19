@@ -52,6 +52,8 @@ async function init() {
     let currentStop = -1; // Variable to store the current stop index. -1 = no stop selected
     let currentPanel = "welcome"; // Variabnle to store the current panel key
     let previousPanel = "welcome"; // Variable to store the previous panel key
+    let activeTour; // Variable to store a reference to the current tour object
+    let activeTourMarkers = []; // Variable to store references to the markers for the active tour
     // Variable to store references to each of the panels in the sidebar
     const panels = {
         welcome: document.getElementById("welcome-container"),
@@ -62,11 +64,11 @@ async function init() {
     const minSidebarWidth = 500; // Minimum width of the sidebar in pixels
     const maxSidebarWidth = window.innerWidth * 0.5; // Maximum width of the sidebar in pixels
 
-    // Variable to store references to each stop marker.
-    const stopMarkers = [];
-
     // Load the configuration data and use object destructuring to assign required data to variables
-    const { image, stops } = await loadConfig();
+    const { image, tours } = await loadConfig();
+
+    // Set the default tour to the first tour in the tours array
+    activeTour = tours[1];
 
     // Create an array of coordinates representing the boundaries of the map and store in a variable
     const bounds = [
@@ -84,11 +86,6 @@ async function init() {
 
     // Add the map image as an overlay on the leaflet map
     L.imageOverlay(image.filePath, bounds).addTo(map);
-
-    // Add the tour route image as an overlay ontop of the map image
-    L.imageOverlay(image.routeFilePath, bounds, { interactive: false }).addTo(
-        map,
-    );
 
     // Fit the map view to the bounds of the image overlay
     map.fitBounds(bounds);
@@ -114,26 +111,50 @@ async function init() {
         imageAlt: "University for the Creative Arts Logo",
     }).addTo(map);
 
-    // Add markers from the stops array in the configuration data, use a ternary operator to set the marker icon if there is one
-    stops.forEach((stop, index) => {
-        const marker = L.marker([stop.lat, stop.lng], {
-            icon: getStopIcon(stop, false),
-        }).addTo(map);
+    // Create layer groups to store the route and stop markers and add them to the map
+    const routeLayer = L.layerGroup().addTo(map);
+    const markerLayer = L.layerGroup().addTo(map);
 
-        stopMarkers.push(marker);
+    // Load the tour data for the default tour
+    loadTour(activeTour);
 
-        // Attach a popup to the marker - effectively acts as mouseover and mouseout events in one
-        marker.bindTooltip(`<strong>${stop.name}</strong>`, {
-            direction: "top",
-            offset: stop.icon.unselectedPath ? [1, -41] : [-14, -11],
+    // Function to load the tour data for the tour provided as an argument
+    function loadTour(tour) {
+        activeTour = tour;
+        activeTourMarkers = [];
+        currentStop = -1; // Reset the stop index when the tour is updated
+
+        // Clear the route and marker layers
+        routeLayer.clearLayers();
+        markerLayer.clearLayers();
+
+        // Add the tour route image to the route layer
+        L.imageOverlay(tour.routeFilePath, bounds, {
+            interactive: false,
+        }).addTo(routeLayer);
+
+        // Add the tour stops as markers on the marker layer
+        tour.stops.forEach((stop, index) => {
+            const marker = L.marker([stop.lat, stop.lng], {
+                icon: getStopIcon(stop, false),
+            }).addTo(markerLayer);
+
+            // Update the activeTourMarkers array with the new marker
+            activeTourMarkers.push(marker);
+
+            // Attach a tooltip to the marker - effectively acts as mouseover and mouseout events in one
+            marker.bindTooltip(`<strong>${stop.name}</strong>`, {
+                direction: "top",
+                offset: stop.icon.unselectedPath ? [1, -41] : [-14, -11],
+            });
+
+            // Attach a click event listener to update the sidebar when the marker is clicked
+            marker.on("click", () => {
+                updateSidebarContent(index);
+                showPanel("tour");
+            });
         });
-
-        // Add click event listener to update the sidebar when a marker is clicked
-        marker.on("click", () => {
-            updateSidebarContent(index);
-            showPanel("tour");
-        });
-    });
+    }
 
     // Function to hide all panels except the currently selected one
     function showPanel(name) {
@@ -147,11 +168,11 @@ async function init() {
         currentStop = stopIndex; // Update the value of current stop
 
         // Set each markers icon, setting the current stops icon as its selected version
-        stopMarkers.forEach((marker, i) =>
-            marker.setIcon(getStopIcon(stops[i], i === currentStop)),
-        );
+        activeTourMarkers.forEach((marker, i) => {
+            marker.setIcon(getStopIcon(activeTour.stops[i], i === currentStop));
+        });
 
-        const currentStopData = stops[stopIndex];
+        const currentStopData = activeTour.stops[stopIndex];
         const tourInformationContainer = document.getElementById(
             "tour-information-container",
         );
@@ -331,7 +352,7 @@ async function init() {
     const nextStopButton = document.getElementById("next-stop-button");
     nextStopButton.addEventListener("click", (e) => {
         // Check if the tour is over
-        if (currentStop === stops.length - 1) {
+        if (currentStop === activeTour.stops.length - 1) {
             map.flyTo([image.height / 2, image.width / 2], -2, {
                 animate: true,
                 duration: 1,
@@ -340,8 +361,8 @@ async function init() {
             currentStop = -1;
 
             // Set each markers icon to the unselected version
-            stopMarkers.forEach((marker, i) =>
-                marker.setIcon(getStopIcon(stops[i], false)),
+            activeTourMarkers.forEach((marker, i) =>
+                marker.setIcon(getStopIcon(activeTour.stops[i], false)),
             );
 
             showPanel("end");
