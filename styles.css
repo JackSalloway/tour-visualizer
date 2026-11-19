@@ -228,7 +228,11 @@ table {
     font-size: clamp(1.25rem, 1.25rem + 2cqi, 2.25rem);
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    margin: 1.5rem 0 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+#welcome-container p {
+    margin-bottom: 1rem;
 }
 
 #controls-instructions {
