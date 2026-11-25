@@ -184,6 +184,10 @@ async function init() {
         );
         let stopImage = document.getElementById("stop-image");
 
+        // Disable the previous stop button if this is the first stop on the tour
+        document.getElementById("previous-stop-button").disabled =
+            stopIndex === 0;
+
         // Update the text content of the header
         tourInformationHeader.textContent = currentStopData.name;
 
@@ -372,6 +376,11 @@ async function init() {
     startTourButton.addEventListener("click", (e) => {
         updateSidebarContent(0);
         showPanel("tour");
+    });
+
+    const previousStopButton = document.getElementById("previous-stop-button");
+    previousStopButton.addEventListener("click", (e) => {
+        if (currentStop > 0) updateSidebarContent(currentStop - 1);
     });
 
     const nextStopButton = document.getElementById("next-stop-button");
