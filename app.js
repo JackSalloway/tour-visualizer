@@ -68,7 +68,7 @@ async function init() {
     const { image, tours } = await loadConfig();
 
     // Set the default tour to the first tour in the tours array
-    activeTour = tours[1];
+    activeTour = tours[0];
 
     // Create an array of coordinates representing the boundaries of the map and store in a variable
     const bounds = [
@@ -341,6 +341,31 @@ async function init() {
         sidebarHandle.classList.remove("dragging"); // Update styles
         document.body.style.userSelect = ""; // Allow the user to select text
         map.fitBounds(bounds, { animate: true }); // Fit the map to the bounds of the image overlay (sets the map back to the centre of its container)
+    });
+
+    const tourSelector = document.getElementById("tour-selector");
+    tours.forEach((tour, index) => {
+        // Create the label element
+        const label = document.createElement("label");
+        label.className = "tour-option";
+
+        // Create input element
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "tour";
+        input.value = tour.name;
+        input.checked = index === 0; // Set the first tour in the config file to be the default
+        input.addEventListener("change", () => {
+            if (input.checked) loadTour(tour);
+        });
+
+        // Create an element to display text
+        const text = document.createElement("span");
+        text.textContent = tour.name;
+
+        // Add the elements to the DOM
+        label.append(input, text);
+        tourSelector.appendChild(label);
     });
 
     const startTourButton = document.getElementById("start-tour-button");
